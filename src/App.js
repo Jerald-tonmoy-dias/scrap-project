@@ -10,11 +10,13 @@ function App() {
   const [scrapInfo, setscrapInfo] = useState({
     url: 'youtube.com ewrtwetew',
     title: 'YouTube 5rg4rtc5y',
-    des: 'Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube ertty.'
+    titleChar: 0,
+    des: 'Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube ertty.',
+    desChar: 0
   });
 
   // destructure items
-  const { url, title, des } = scrapInfo;
+  const { url, title, des, desChar, titleChar } = scrapInfo;
 
   const [showdata, setShowdata] = useState(false);
   const [showRatings, setShowRatings] = useState(false);
@@ -26,7 +28,19 @@ function App() {
   // useeffect
   useEffect(() => {
     // fetch data and store it
+    // show req
+    let requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+
+    fetch("w3schools.com", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   }, []);
+
+
 
   // handle checkbox
   const handledate = (e) => {
@@ -49,8 +63,12 @@ function App() {
   const handleChange = (e) => {
     setscrapInfo({
       ...scrapInfo,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      titleChar: e.target.value.length,
+      desChar: e.target.value.length,
+
     })
+
   }
 
   // handle reset
@@ -78,9 +96,11 @@ function App() {
 
     //get meta tag with content
   }
+
+
   return (
     <div className='container-fluid my-5'>
-      <div className='row justify-content-center px-lg-5'>
+      <div className='row justify-content-center px-xl-5'>
         <div className='col-lg-12 text-center mb-4'>
           <h2 className='scrap-title'><span>Google</span> SERP Simulator</h2>
           <h5>Just enter your title tag and meta des to see your website's SERP snippet preview.</h5>
@@ -104,6 +124,8 @@ function App() {
           showHeatmap={showHeatmap}
           handleReset={handleReset}
           handleChange={handleChange}
+          desChar={desChar}
+          titleChar={titleChar}
         />
 
         {/* right content */}

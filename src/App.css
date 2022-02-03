@@ -24,6 +24,9 @@ h1,h2,h3,h4,h5,h6 {
   outline: 0;
   box-shadow: none;
 }
+.form-control::-webkit-scrollbar {
+  display: none;
+}
 /* global style end */
 
 .scrap-wrapper {
@@ -362,4 +365,10 @@ transition: .3s;
 .goolge-search {
   width: 100%;
 }
+}
+@media (min-width: 991px) and (max-width: 1199.98px) { 
+  .left-content {
+    padding: 60px 10px;
+  }
+  
 }

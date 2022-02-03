@@ -14,21 +14,11 @@ const Leftside = ({
     showHeatmap,
     handleHeatmap,
     handleReset,
-    handleChange
+    handleChange,
+    titleChar,
+    desChar
 }
 ) => {
-
-
-
-    const [count, setCount] = useState(0);
-
-
-
-    const countCharacter = (e) => {
-        // count = e.value.length;
-        // setCount(parseInt(e.target.value))
-        console.log('kaj kore');
-    }
 
 
     return (
@@ -38,7 +28,6 @@ const Leftside = ({
                     <form onSubmit={(e) => e.preventDefault()}>
                         <div className="mb-3 form-wrapper position-relative">
                             <label htmlFor="form-url" className="form-label label-title">URL</label>
-                            <button className='btn btn-sm fetch-btn' href="#"> fetch data</button>
                             <input
                                 type="url"
                                 className="form-control"
@@ -47,6 +36,7 @@ const Leftside = ({
                                 id="form-url"
                                 placeholder="http://youtube.com"
                                 defaultValue={url} />
+                            <button className='btn btn-sm fetch-btn' href="#"> fetch data</button>
                         </div>
 
                         <div className="mb-3 form-wrapper position-relative mt-5">
@@ -62,7 +52,7 @@ const Leftside = ({
                                 id="title" rows="2"></textarea>
                             <div className='d-flex justify-content-between align-items-center  mt-4'>
                                 <button className='btn btn-sm capitalize-btn'>capitalizae text</button>
-                                <span className='chars-info'>28 chars (262 / 600px)</span>
+                                <span className='chars-info'>{titleChar} chars (262 / 600px)</span>
                             </div>
                             {/* {`count amount : ${count}`} */}
                         </div>
@@ -79,7 +69,7 @@ const Leftside = ({
                             </textarea>
                             <div className='d-flex justify-content-end align-items-center  mt-4'>
 
-                                <span className='chars-info'>28 chars (262 / 600px)</span>
+                                <span className='chars-info'>{desChar} chars (262 / 600px)</span>
                             </div>
                         </div>
 
