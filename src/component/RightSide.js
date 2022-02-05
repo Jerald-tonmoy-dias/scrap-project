@@ -107,7 +107,7 @@ const Rightside = ({
                 {url}
               </a>
               <h4 className="title mt-2" id="scrp_title">{title}</h4>
-              <p>
+              <p id='metaContent'>
                 {showdata ? <span className="date">Aug 20 2021-</span> : ""}
                 {des}
               </p>

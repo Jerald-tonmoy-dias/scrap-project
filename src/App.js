@@ -7,10 +7,10 @@ import Rightside from "./component/RightSide";
 function App() {
   // state here
   const [scrapInfo, setscrapInfo] = useState({
-    url: "youtube.com ewrtwetew",
-    title: "YouTube is awesome",
+    url: "",
+    title: "",
     titleChar: 0,
-    des: "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube ertty.",
+    des: "",
     desChar: 0,
   });
   // destructure items
@@ -25,25 +25,33 @@ function App() {
 
   // useeffect
   useEffect(() => {
+  }, []);
+
+  const fetchData = (e, url) => {
+    // e.preventDefault();
+
+    var el = document.createElement('html');
     // fetch data and store it
     let requestOptions = {
       method: "GET",
       redirect: "follow",
     };
-    fetch("w3schools.com", requestOptions)
-      .then((response) => response.JSON.parse())
+
+    fetch(`${url}`, requestOptions)
+      .then((response) => response.text())
       .then((result) => {
-        // let abc = JSON.parse(JSON.stringify(result));
-        let abc = result;
-        console.log(typeof abc);
+        el.innerHTML = result;
+        console.log(el);
+        console.log(el.getElementsByTagName("title")[0].innerText);
+        console.log(el.querySelector('meta[name="description"]').content);
+        setscrapInfo({
+          ...scrapInfo,
+          title: el.getElementsByTagName("title")[0].innerText,
+          des: el.querySelector('meta[name="description"]').content
+        })
       })
       .catch((error) => console.log("error", error));
-  }, []);
-
-  // meta perse
-
-
-
+  }
   // handle checkbox
   const handledate = (e) => {
     setShowdata(!showdata);
@@ -105,16 +113,16 @@ function App() {
   let desArray = des.toLowerCase().split(" ");
 
   const makeBold = (e) => {
-    let matchValue = e.target.value.toLowerCase().split(" ");
-    matchValue.filter((item) => {
-      desArray.map((des) => {
-        if (item == des) {
-          item.bold()
-        } else {
-          console.log('mile nai');
-        }
-      })
-    });
+    // let matchValue = e.target.value.toLowerCase().split(" ");
+    // matchValue.filter((item) => {
+    //   desArray.map((des) => {
+    //     if (item == des) {
+    //       item.bold()
+    //     } else {
+    //       console.log('mile nai');
+    //     }
+    //   })
+    // });
 
   };
 
@@ -122,8 +130,14 @@ function App() {
   const handleExportHTML = (e) => {
     e.preventDefault();
     // get title tag with content
-
+    let copyTitle = document.getElementById("scrp_title").innerText;
     //get meta tag with content
+    let copyContent = document.getElementById("metaContent").innerText;
+
+    let webInfo = `<title>${copyTitle}</title>
+    <meta name="description" content='${copyContent}' />`;
+
+    navigator.clipboard.writeText(webInfo);
   };
 
   return (
@@ -161,6 +175,8 @@ function App() {
           titleChar={titleChar}
           makeBold={makeBold}
           handleCapitalize={handleCapitalize}
+          fetchData={fetchData}
+          handleExportHTML={handleExportHTML}
         />
 
         {/* right content */}

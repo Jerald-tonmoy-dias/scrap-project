@@ -15,14 +15,10 @@ const Leftside = ({
     handleReset,
     handleChange,
     makeBold,
-    handleCapitalize
+    handleCapitalize,
+    fetchData,
+    handleExportHTML
 }) => {
-
-    // progess bar
-    // let total = 250;
-
-    // let desWidth = 250 / title.length * 100;
-
     return (
         <>
             <div className="col-lg-4 mt-4">
@@ -33,7 +29,7 @@ const Leftside = ({
                                 URL
                             </label>
                             <input
-                                type="url"
+                                type="text"
                                 className="form-control"
                                 onChange={handleChange}
                                 name="url"
@@ -41,7 +37,7 @@ const Leftside = ({
                                 placeholder="http://youtube.com"
                                 defaultValue={url}
                             />
-                            <button className="btn btn-sm fetch-btn" href="#">
+                            <button type="submit" onClick={() => fetchData(url)} className="btn btn-sm fetch-btn" href="#">
                                 {" "}
                                 fetch data
                             </button>
@@ -51,7 +47,7 @@ const Leftside = ({
                             {/* progress bar */}
                             {title.length < 250 ?
                                 <span className="snippet-progress"
-                                    style={{ width: `${250 / 100 * title.length / 6}%`, background: "#00a9ff" }}>
+                                    style={{ width: `${250 / 100 * title.length / 7}%`, background: "#00a9ff" }}>
                                 </span> :
                                 <span className="snippet-progress"
                                     style={{ width: `100%`, background: "#d9534f" }}>
@@ -66,7 +62,7 @@ const Leftside = ({
                                 className="form-control"
                                 defaultValue={title}
                                 id="title"
-                                rows="2"
+                                rows="4"
                             ></textarea>
                             <div className="d-flex justify-content-between align-items-center  mt-4">
                                 <button className="btn btn-sm capitalize-btn"
@@ -96,7 +92,7 @@ const Leftside = ({
                                 defaultValue={des}
                                 className="form-control"
                                 id="Description"
-                                rows="2"
+                                rows="5"
                             ></textarea>
                             <div className="d-flex justify-content-end align-items-center  mt-4">
                                 <span className="chars-info">{`${des.length}`}/500 chars</span>
@@ -184,7 +180,7 @@ const Leftside = ({
                         </div>
                         {/* operational button */}
                         <div className="operational-btn-grp d-flex align-items-center mt-4">
-                            <button className="btn btn-sm me-3 blue-btn">
+                            <button onClick={handleExportHTML} className="btn btn-sm me-3 blue-btn">
                                 export as HTML
                             </button>
                             <button
