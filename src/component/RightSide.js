@@ -19,7 +19,7 @@ const Rightside = ({
       <div className="col-lg-8 mt-4">
         <div
           style={
-            responsive === "mobile" ? { width: "400px", margin: "0 auto" } : {}
+            responsive === "mobile" ? { width: "400px", margin: "0 auto", transition: '-moz-initial.5s', transition: '.5s' } : { width: "100%", transition: '-moz-initial.5s', transition: '.5s' }
           }
         >
           {/* buttons */}
@@ -77,7 +77,7 @@ const Rightside = ({
                   {" "}
                   <strong>Ad.</strong> https://wixsolution.com/
                 </a>
-                <h4 className="title mt-2">WiX SEO Services</h4>
+                <h4 className="title mt-2" >WiX SEO Services</h4>
                 <p>
                   We Bring Creative Solutions to our clients both in Marketing
                   and SEO Optimization for WIX
@@ -106,7 +106,7 @@ const Rightside = ({
               <a href="#" className="link">
                 {url}
               </a>
-              <h4 className="title mt-2">{title}</h4>
+              <h4 className="title mt-2" id="scrp_title">{title}</h4>
               <p>
                 {showdata ? <span className="date">Aug 20 2021-</span> : ""}
                 {des}

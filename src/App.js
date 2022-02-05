@@ -3,11 +3,12 @@ import axios from "axios";
 import "./App.css";
 import Leftside from "./component/LeftSide";
 import Rightside from "./component/RightSide";
+
 function App() {
   // state here
   const [scrapInfo, setscrapInfo] = useState({
     url: "youtube.com ewrtwetew",
-    title: "YouTube 5rg4rtc5y",
+    title: "YouTube is awesome",
     titleChar: 0,
     des: "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube ertty.",
     desChar: 0,
@@ -25,15 +26,23 @@ function App() {
   // useeffect
   useEffect(() => {
     // fetch data and store it
-    // let requestOptions = {
-    //   method: "GET",
-    //   redirect: "follow",
-    // };
-    // fetch("w3schools.com", requestOptions)
-    //   .then((response) => response.text())
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.log("error", error));
+    let requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    fetch("w3schools.com", requestOptions)
+      .then((response) => response.JSON.parse())
+      .then((result) => {
+        // let abc = JSON.parse(JSON.stringify(result));
+        let abc = result;
+        console.log(typeof abc);
+      })
+      .catch((error) => console.log("error", error));
   }, []);
+
+  // meta perse
+
+
 
   // handle checkbox
   const handledate = (e) => {
@@ -78,6 +87,19 @@ function App() {
   const handlemobile = (e) => {
     setresponsive("mobile");
   };
+
+  // handle capitalize
+  const handleCapitalize = (e) => {
+    const str = document.getElementById('scrp_title').innerText;
+    const arr = str.split(" ");
+
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].toLowerCase().slice(1);
+    }
+    const str2 = arr.join(" ");
+    document.getElementById('scrp_title').innerText = str2;
+
+  }
 
   // makebold
   let desArray = des.split(" ");
@@ -145,6 +167,7 @@ function App() {
           desChar={desChar}
           titleChar={titleChar}
           makeBold={makeBold}
+          handleCapitalize={handleCapitalize}
         />
 
         {/* right content */}
