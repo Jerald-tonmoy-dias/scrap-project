@@ -8,9 +8,9 @@ function App() {
   // state here
   const [scrapInfo, setscrapInfo] = useState({
     url: "",
-    title: "",
+    title: "Youtube",
     titleChar: 0,
-    des: "",
+    des: "Video Player",
     desChar: 0,
   });
   // destructure items
@@ -106,23 +106,33 @@ function App() {
     }
     const str2 = arr.join(" ");
     document.getElementById('scrp_title').innerText = str2;
-
   }
 
   // makebold
-  let desArray = des.toLowerCase().split(" ");
+  // let desArray = document.getElementById('metaContent').innerText.toLowerCase().split(' ');
 
   const makeBold = (e) => {
     // let matchValue = e.target.value.toLowerCase().split(" ");
-    // matchValue.filter((item) => {
-    //   desArray.map((des) => {
-    //     if (item == des) {
-    //       item.bold()
+    // for (let i = 0; i < desArray.length; i++) {
+    //   for (let j = 0; j < matchValue.length; j++) {
+    //     if (desArray[i] == matchValue[j]) {
+    //     let boldValue =  desArray[i] = matchValue[i].bold()
     //     } else {
     //       console.log('mile nai');
     //     }
+    //   }
+    // }
+    // desArray.join(' ');
+    // console.log(desArray);
+
+    // desArray.map((mainArray) => {
+    //   matchValue.filter((item) => {
+    //     if (mainArray === item) {
+    //       console.log(item);
+    //     }
     //   })
-    // });
+    // })
+
 
   };
 

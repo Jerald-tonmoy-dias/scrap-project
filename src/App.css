@@ -67,6 +67,11 @@ h6 {
   text-decoration: none;
   font-size: 14px;
   text-transform: capitalize;
+  transition: .3s;
+}
+.tip:hover {
+background-color: var(--primary-color);
+color: #fff;
 }
 .goolge-search {
   height: 44px;
