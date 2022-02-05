@@ -40,8 +40,6 @@ function App() {
       .catch(error => console.log('error', error));
   }, []);
 
-
-
   // handle checkbox
   const handledate = (e) => {
     setShowdata(!showdata);
