@@ -102,27 +102,20 @@ function App() {
   }
 
   // makebold
-  let desArray = des.split(" ");
-
-  // bold string
-  function boldString(str, substr) {
-    var strRegExp = new RegExp(substr, "g");
-    return str.replace(strRegExp, "<b>" + substr + "</b>");
-  }
+  let desArray = des.toLowerCase().split(" ");
 
   const makeBold = (e) => {
-    let matchValue = e.target.value.split(" ");
-    // console.log("change value", desArray);
-    // console.log("match value", matchValue);
-
-    let boldValue = desArray.filter((filterItems) => {
-      if (matchValue.includes(filterItems)) {
-        console.log("filter value inside", "milse");
-      } else {
-        console.log("filter value outside", "mile nai");
-      }
+    let matchValue = e.target.value.toLowerCase().split(" ");
+    matchValue.filter((item) => {
+      desArray.map((des) => {
+        if (item == des) {
+          item.bold()
+        } else {
+          console.log('mile nai');
+        }
+      })
     });
-    return boldValue;
+
   };
 
   // handleExportHTML

@@ -17,6 +17,12 @@ const Leftside = ({
     makeBold,
     handleCapitalize
 }) => {
+
+    // progess bar
+    // let total = 250;
+
+    // let desWidth = 250 / title.length * 100;
+
     return (
         <>
             <div className="col-lg-4 mt-4">
@@ -41,10 +47,16 @@ const Leftside = ({
                             </button>
                         </div>
 
-                        <div className="mb-3 form-wrapper position-relative mt-5">
+                        <div className="mb-3 form-wrapper position-relative mt-5 ">
                             {/* progress bar */}
-
-                            {/* <span className="snippet-progress"></span> */}
+                            {title.length < 250 ?
+                                <span className="snippet-progress"
+                                    style={{ width: `${250 / 100 * title.length / 6}%`, background: "#00a9ff" }}>
+                                </span> :
+                                <span className="snippet-progress"
+                                    style={{ width: `100%`, background: "#d9534f" }}>
+                                </span>
+                            }
                             <label htmlFor="title" className="form-label label-title">
                                 Title
                             </label>
@@ -62,11 +74,19 @@ const Leftside = ({
                                 >
                                     capitalizae text
                                 </button>
-                                <span className="chars-info">{`${title.length} chars`}</span>
+                                <span className="chars-info">{`${title.length}`}/250 chars</span>
                             </div>
                         </div>
 
                         <div className="mb-3 form-wrapper position-relative mt-5">
+                            {des.length < 500 ?
+                                <span className="snippet-progress"
+                                    style={{ width: `${500 / 100 * des.length / 25}%`, background: "#00a9ff" }}>
+                                </span> :
+                                <span className="snippet-progress"
+                                    style={{ width: `100%`, background: "#d9534f" }}>
+                                </span>
+                            }
                             <label htmlFor="Description" className="form-label label-title">
                                 Description
                             </label>
@@ -79,7 +99,7 @@ const Leftside = ({
                                 rows="2"
                             ></textarea>
                             <div className="d-flex justify-content-end align-items-center  mt-4">
-                                <span className="chars-info">{`${des.length} chars`}</span>
+                                <span className="chars-info">{`${des.length}`}/500 chars</span>
                             </div>
                         </div>
 
@@ -176,7 +196,7 @@ const Leftside = ({
                         </div>
                     </form>
                 </div>
-            </div>
+            </div >
         </>
     );
 };
