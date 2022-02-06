@@ -1,3 +1,5 @@
+
+
 const Leftside = ({
     url,
     title,
@@ -37,7 +39,7 @@ const Leftside = ({
                                 placeholder="http://youtube.com"
                                 defaultValue={url}
                             />
-                            <button type="submit" onClick={() => fetchData(url)} className="btn btn-sm fetch-btn" href="#">
+                            <button type="submit" onClick={() => fetchData()} className="btn btn-sm fetch-btn" href="#">
                                 {" "}
                                 fetch data
                             </button>
@@ -108,7 +110,7 @@ const Leftside = ({
                                 className="form-control"
                                 onChange={makeBold}
                                 id="bold-key"
-                                placeholder="sepearte with a space or comma"
+                                placeholder="sepearte with a space"
                             />
                         </div>
 

@@ -1,3 +1,4 @@
+import Parser from 'html-react-parser';
 import mapImg from "../../src/image/map.png";
 import google from "../../src/image/google.png";
 import heatmap from "../../src/image/heatmap.png";
@@ -13,7 +14,6 @@ const Rightside = ({
   handledesktop,
   handlemobile,
   responsive,
-  getDataFromAPI
 }) => {
   return (
     <>
@@ -44,7 +44,6 @@ const Rightside = ({
                 <input
                   type="text"
                   className={`goolge-search ${responsive}`}
-                  onChange={getDataFromAPI}
                   placeholder="Enter a keyword to get real search result"
                 />
               </div>
@@ -109,9 +108,10 @@ const Rightside = ({
                 {url}
               </a>
               <h4 className="title mt-2" id="scrp_title">{title}</h4>
-              <p id='metaContent'>
+              <p id='metaContent' >
                 {showdata ? <span className="date">Aug 20 2021-</span> : ""}
-                {des}
+                {Parser(des)}
+                {/* {des} */}
               </p>
               {showRatings ? (
                 <div className="ratings-wrapper d-flex">
@@ -183,7 +183,7 @@ const Rightside = ({
             </div>
             {/* 
             {/* google serach result */}
-            <div class="gcse-search"></div> */}
+            <div className="gcse-search"></div>
           </div>
         </div>
       </div>

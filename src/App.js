@@ -8,9 +8,9 @@ function App() {
   // state here
   const [scrapInfo, setscrapInfo] = useState({
     url: "",
-    title: "Youtube",
+    title: "",
     titleChar: 0,
-    des: "Video Player",
+    des: "",
     desChar: 0,
   });
   // destructure items
@@ -23,36 +23,41 @@ function App() {
   const [showHeatmap, setShowHeatmap] = useState(false);
   const [responsive, setresponsive] = useState("desktop"); //mobile ,desktop
 
-  const [myOptions, setMyOptions] = useState([])
   // useeffect
   useEffect(() => {
+
+    setscrapInfo({
+      ...scrapInfo,
+      title: 'yourwebsite.com',
+      des: 'We Bring Creative Solutions to our clients both in Marketing and SEO Optimization for WIX',
+    })
+    // var requestOptions = {
+    //   method: 'GET'
+    // };
+
+    // fetch("vimeo.com", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log('error', error));
+    // fetch('https://jsonplaceholder.typicode.com')
+    //   .then(response => response.text())
+    //   .then(formatedResponse => console.log(formatedResponse))
   }, []);
 
-  // google search option
-  const getDataFromAPI = () => {
-    console.log("Options Fetched from API")
-
-    fetch('http://dummy.restapiexample.com/api/v1/employees').then((response) => {
-      return response.json()
-    }).then((res) => {
-      console.log(res.data)
-      for (var i = 0; i < res.data.length; i++) {
-        myOptions.push(res.data[i].employee_name)
-      }
-      setMyOptions(myOptions)
-    })
-  }
-
-  const fetchData = (e, url) => {
-    // e.preventDefault();
-
-    var el = document.createElement('html');
+  // fetch data from other website
+  const fetchData = (e) => {
+    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    let el = document.createElement('html');
     // fetch data and store it
     let requestOptions = {
       method: "GET",
       redirect: "follow",
+      // mode: 'no-cors',
+      // ['Access-Control-Request-Method']: '*',
     };
 
+
+    // fetch(`${proxyurl + url}`, requestOptions)
     fetch(`${url}`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
@@ -62,12 +67,20 @@ function App() {
         // console.log(el.querySelector('meta[name="description"]').content);
         setscrapInfo({
           ...scrapInfo,
-          title: el.getElementsByTagName("title")[0].innerText,
-          des: el.querySelector('meta[name="description"]').content
+          title: el.getElementsByTagName("title")[0] ? el.getElementsByTagName("title")[0].innerText : 'Title is empty!',
+          des: el.querySelector('meta[name="description"]') ? el.querySelector('meta[name="description"]').content : 'Meta description is empty!',
         })
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => {
+        setscrapInfo({
+          ...scrapInfo,
+          title: 'failed to fetch title',
+          des: 'failed to fetch description',
+        })
+        console.log(error);
+      });
   }
+
   // handle checkbox
   const handledate = (e) => {
     setShowdata(!showdata);
@@ -124,36 +137,6 @@ function App() {
     document.getElementById('scrp_title').innerText = str2;
   }
 
-  // makebold
-  // let desArray = document.getElementById('metaContent').innerText.toLowerCase().split(' ');
-
-  const makeBold = (e) => {
-    // let matchValue = e.target.value.toLowerCase().split(" ");
-    // for (let i = 0; i < desArray.length; i++) {
-
-    //   for (let j = 0; j < matchValue.length; j++) {
-
-    //     if (desArray[i] == matchValue[j]) {
-    //       let boldValue = desArray[i] = matchValue[i].bold()
-    //       console.log(boldValue);
-    //     } else {
-    //       console.log('mile nai');
-    //     }
-    //   }
-    // }
-
-    // desArray.join(' ');
-    // console.log(desArray);
-
-    // desArray.map((mainArray) => {
-    //   matchValue.filter((item) => {
-    //     if (mainArray === item) {
-    //       console.log(item);
-    //     }
-    //   })
-    // })
-  };
-
   // handleExportHTML
   const handleExportHTML = (e) => {
     e.preventDefault();
@@ -167,6 +150,33 @@ function App() {
 
     navigator.clipboard.writeText(webInfo);
   };
+
+  // makebold
+  let desArray = des.toLowerCase().split(' ');
+
+  const makeBold = (e) => {
+    let matchValue = e.target.value.toLowerCase().split(' ');
+
+    matchValue.map((match) => {
+      desArray.map((des) => {
+        if (match == des) {
+          // let replace = `<b>${des}</b>`;
+          let replace = des.bold().toUpperCase();
+          let ind = desArray.indexOf(des);
+          desArray[ind] = replace;
+          setscrapInfo({
+            ...scrapInfo,
+            des: desArray.join(' ')
+          });
+        } else {
+          console.log('not found');
+        }
+
+      })
+    })
+  };
+
+
 
   return (
     <div className="container-fluid my-5">
@@ -222,7 +232,6 @@ function App() {
           handledesktop={handledesktop}
           handlemobile={handlemobile}
           responsive={responsive}
-          getDataFromAPI={getDataFromAPI}
         />
       </div>
     </div>
