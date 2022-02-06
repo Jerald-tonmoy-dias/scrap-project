@@ -178,13 +178,13 @@ input.goolge-search.mobile {
   left: 25px;
   background: #fff;
   padding: 0 10px;
+  border-radius: 10px;
 }
 .option-label {
   font-size: 14px;
   color: var(--heading-color);
   font-weight: 500;
   text-transform: capitalize;
-
 }
 .left-content .form-wrapper .form-control {
   padding: 20px;

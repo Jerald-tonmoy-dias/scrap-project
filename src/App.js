@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./App.css";
 import Leftside from "./component/LeftSide";
 import Rightside from "./component/RightSide";
@@ -13,6 +12,7 @@ function App() {
     des: "",
     desChar: 0,
   });
+
   // destructure items
   const { url, title, des, desChar, titleChar } = scrapInfo;
 
@@ -25,23 +25,11 @@ function App() {
 
   // useeffect
   useEffect(() => {
-
     setscrapInfo({
       ...scrapInfo,
       title: 'yourwebsite.com',
       des: 'We Bring Creative Solutions to our clients both in Marketing and SEO Optimization for WIX',
     })
-    // var requestOptions = {
-    //   method: 'GET'
-    // };
-
-    // fetch("vimeo.com", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log('error', error));
-    // fetch('https://jsonplaceholder.typicode.com')
-    //   .then(response => response.text())
-    //   .then(formatedResponse => console.log(formatedResponse))
   }, []);
 
   // fetch data from other website
@@ -52,8 +40,6 @@ function App() {
     let requestOptions = {
       method: "GET",
       redirect: "follow",
-      // mode: 'no-cors',
-      // ['Access-Control-Request-Method']: '*',
     };
 
 
@@ -62,9 +48,6 @@ function App() {
       .then((response) => response.text())
       .then((result) => {
         el.innerHTML = result;
-        // console.log(el);
-        // console.log(el.getElementsByTagName("title")[0].innerText);
-        // console.log(el.querySelector('meta[name="description"]').content);
         setscrapInfo({
           ...scrapInfo,
           title: el.getElementsByTagName("title")[0] ? el.getElementsByTagName("title")[0].innerText : 'Title is empty!',
@@ -175,7 +158,6 @@ function App() {
       })
     })
   };
-
 
 
   return (
