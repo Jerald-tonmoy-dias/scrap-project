@@ -198,6 +198,7 @@ input.goolge-search.mobile {
   display: inline-block;
   position: absolute;
   border-radius: 10px;
+  left: 6px;
 }
 /* right content */
 .right-content {

@@ -23,9 +23,25 @@ function App() {
   const [showHeatmap, setShowHeatmap] = useState(false);
   const [responsive, setresponsive] = useState("desktop"); //mobile ,desktop
 
+  const [myOptions, setMyOptions] = useState([])
   // useeffect
   useEffect(() => {
   }, []);
+
+  // google search option
+  const getDataFromAPI = () => {
+    console.log("Options Fetched from API")
+
+    fetch('http://dummy.restapiexample.com/api/v1/employees').then((response) => {
+      return response.json()
+    }).then((res) => {
+      console.log(res.data)
+      for (var i = 0; i < res.data.length; i++) {
+        myOptions.push(res.data[i].employee_name)
+      }
+      setMyOptions(myOptions)
+    })
+  }
 
   const fetchData = (e, url) => {
     // e.preventDefault();
@@ -41,9 +57,9 @@ function App() {
       .then((response) => response.text())
       .then((result) => {
         el.innerHTML = result;
-        console.log(el);
-        console.log(el.getElementsByTagName("title")[0].innerText);
-        console.log(el.querySelector('meta[name="description"]').content);
+        // console.log(el);
+        // console.log(el.getElementsByTagName("title")[0].innerText);
+        // console.log(el.querySelector('meta[name="description"]').content);
         setscrapInfo({
           ...scrapInfo,
           title: el.getElementsByTagName("title")[0].innerText,
@@ -114,14 +130,18 @@ function App() {
   const makeBold = (e) => {
     // let matchValue = e.target.value.toLowerCase().split(" ");
     // for (let i = 0; i < desArray.length; i++) {
+
     //   for (let j = 0; j < matchValue.length; j++) {
+
     //     if (desArray[i] == matchValue[j]) {
-    //     let boldValue =  desArray[i] = matchValue[i].bold()
+    //       let boldValue = desArray[i] = matchValue[i].bold()
+    //       console.log(boldValue);
     //     } else {
     //       console.log('mile nai');
     //     }
     //   }
     // }
+
     // desArray.join(' ');
     // console.log(desArray);
 
@@ -132,8 +152,6 @@ function App() {
     //     }
     //   })
     // })
-
-
   };
 
   // handleExportHTML
@@ -204,6 +222,7 @@ function App() {
           handledesktop={handledesktop}
           handlemobile={handlemobile}
           responsive={responsive}
+          getDataFromAPI={getDataFromAPI}
         />
       </div>
     </div>

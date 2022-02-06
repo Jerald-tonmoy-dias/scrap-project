@@ -45,12 +45,12 @@ const Leftside = ({
 
                         <div className="mb-3 form-wrapper position-relative mt-5 ">
                             {/* progress bar */}
-                            {title.length < 250 ?
+                            {title.length < 120 ?
                                 <span className="snippet-progress"
-                                    style={{ width: `${250 / 100 * title.length / 7}%`, background: "#00a9ff" }}>
+                                    style={{ width: `${120 / 100 * title.length / 1.45}%`, background: "#00a9ff" }}>
                                 </span> :
                                 <span className="snippet-progress"
-                                    style={{ width: `100%`, background: "#d9534f" }}>
+                                    style={{ width: `98%`, background: "#d9534f" }}>
                                 </span>
                             }
                             <label htmlFor="title" className="form-label label-title">
@@ -70,17 +70,17 @@ const Leftside = ({
                                 >
                                     capitalizae text
                                 </button>
-                                <span className="chars-info">{`${title.length}`}/250 chars</span>
+                                <span className="chars-info">{`${title.length}`}/120 chars</span>
                             </div>
                         </div>
 
                         <div className="mb-3 form-wrapper position-relative mt-5">
-                            {des.length < 500 ?
+                            {des.length < 250 ?
                                 <span className="snippet-progress"
-                                    style={{ width: `${500 / 100 * des.length / 25}%`, background: "#00a9ff" }}>
+                                    style={{ width: `${250 / 100 * des.length / 7}%`, background: "#00a9ff" }}>
                                 </span> :
                                 <span className="snippet-progress"
-                                    style={{ width: `100%`, background: "#d9534f" }}>
+                                    style={{ width: `98%`, background: "#d9534f" }}>
                                 </span>
                             }
                             <label htmlFor="Description" className="form-label label-title">
@@ -95,7 +95,7 @@ const Leftside = ({
                                 rows="5"
                             ></textarea>
                             <div className="d-flex justify-content-end align-items-center  mt-4">
-                                <span className="chars-info">{`${des.length}`}/500 chars</span>
+                                <span className="chars-info">{`${des.length}`}/250 chars</span>
                             </div>
                         </div>
 

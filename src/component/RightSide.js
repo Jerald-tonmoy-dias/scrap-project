@@ -13,6 +13,7 @@ const Rightside = ({
   handledesktop,
   handlemobile,
   responsive,
+  getDataFromAPI
 }) => {
   return (
     <>
@@ -43,6 +44,7 @@ const Rightside = ({
                 <input
                   type="text"
                   className={`goolge-search ${responsive}`}
+                  onChange={getDataFromAPI}
                   placeholder="Enter a keyword to get real search result"
                 />
               </div>
@@ -179,6 +181,9 @@ const Rightside = ({
                 <div className="snippet-descr"></div>
               </div>
             </div>
+            {/* 
+            {/* google serach result */}
+            <div class="gcse-search"></div> */}
           </div>
         </div>
       </div>
