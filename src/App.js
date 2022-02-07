@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import "./App.css";
 import Leftside from "./component/LeftSide";
 import Rightside from "./component/RightSide";
@@ -23,6 +23,10 @@ function App() {
   const [showHeatmap, setShowHeatmap] = useState(false);
   const [responsive, setresponsive] = useState("desktop"); //mobile ,desktop
 
+  const [titleWidth, setTitleWidth] = useState(0);
+  const [desWidth, setdesWidth] = useState(0);
+  const [boldtext, setBoldtext] = useState([]);
+
   // useeffect
   useEffect(() => {
     setscrapInfo({
@@ -30,6 +34,8 @@ function App() {
       title: 'yourwebsite.com',
       des: 'We Bring Creative Solutions to our clients both in Marketing and SEO Optimization for WIX',
     })
+
+    // setBold('We Bring Creative Solutions to our clients both in Marketing and SEO Optimization for WIX')
   }, []);
 
   // fetch data from other website
@@ -87,7 +93,19 @@ function App() {
       ...scrapInfo,
       [e.target.name]: e.target.value,
     });
-  };
+
+    // title
+    let titleEl = document.getElementById("titleWidth");
+    let width = titleEl.clientWidth;
+    setTitleWidth(width)
+
+    // des
+    let desEl = document.getElementById("desWidth");
+    let dwidth = desEl.clientWidth;
+    setdesWidth(dwidth)
+
+
+  }
 
   // handle reset
   const handleReset = (e) => {
@@ -134,31 +152,45 @@ function App() {
     navigator.clipboard.writeText(webInfo);
   };
 
+  // let boldtext = ['we', 'bring'];
+  // console.log(boldtext);
+
   // makebold
-  let desArray = des.toLowerCase().split(' ');
-
+  // let desArray = des.toLowerCase().split(' ');
   const makeBold = (e) => {
-    let matchValue = e.target.value.toLowerCase().split(' ');
+    // boldtext.push(e.target.value);
+    let tempArray = []
 
-    matchValue.map((match) => {
-      desArray.map((des) => {
-        if (match == des) {
-          // let replace = `<b>${des}</b>`;
-          let replace = des.bold().toUpperCase();
-          let ind = desArray.indexOf(des);
-          desArray[ind] = replace;
-          setscrapInfo({
-            ...scrapInfo,
-            des: desArray.join(' ')
-          });
-        } else {
-          console.log('not found');
-        }
+    tempArray.push(e.target.value);
 
-      })
-    })
+    // tempArray.push(e.target.value);
+
+
+    // console.log(tempArray);
+    // t(boldtext);
+    setBoldtext(tempArray);
+
+    // let matchValue = e.target.value.toLowerCase().split(' ');
+    // let checkvalue = document.getElementById("boldvalue");
+
+    // matchValue.map((match) => {
+    //   desArray.map((des) => {
+    //     if (match == des) {
+    //       let replace = des.bold();
+    //       let ind = desArray.indexOf(des);
+    //       desArray[ind] = replace;
+    //     }
+
+    //     setscrapInfo({
+    //       ...scrapInfo,
+    //       des: desArray.join(' ')
+    //     });
+
+    //   })
+    // });
+
+
   };
-
 
   return (
     <div className="container-fluid my-5">
@@ -197,6 +229,9 @@ function App() {
           handleCapitalize={handleCapitalize}
           fetchData={fetchData}
           handleExportHTML={handleExportHTML}
+          titleWidth={titleWidth}
+          desWidth={desWidth}
+        // removeBold={removeBold}
         />
 
         {/* right content */}
@@ -214,6 +249,9 @@ function App() {
           handledesktop={handledesktop}
           handlemobile={handlemobile}
           responsive={responsive}
+          titleWidth={titleWidth}
+          desWidth={desWidth}
+          boldtext={boldtext}
         />
       </div>
     </div>

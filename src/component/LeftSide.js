@@ -1,5 +1,4 @@
 
-
 const Leftside = ({
     url,
     title,
@@ -19,8 +18,18 @@ const Leftside = ({
     makeBold,
     handleCapitalize,
     fetchData,
-    handleExportHTML
+    handleExportHTML,
+    titleWidth,
+    desWidth,
+    removeBold
 }) => {
+
+    // var elemDiv = document.getElementById('a');
+
+    // elemDiv.onclick = function() {
+    // console.log(elemDiv.clientWidth + 'px');
+    // }
+
     return (
         <>
             <div className="col-lg-4 mt-4">
@@ -47,17 +56,19 @@ const Leftside = ({
 
                         <div className="mb-3 form-wrapper position-relative mt-5 ">
                             {/* progress bar */}
-                            {title.length < 120 ?
+                            {titleWidth < 600 ?
                                 <span className="snippet-progress"
-                                    style={{ width: `${120 / 100 * title.length / 1.45}%`, background: "#00a9ff" }}>
+                                    style={{ width: `${100 / 600 * titleWidth}%`, background: "#00a9ff" }}>
                                 </span> :
                                 <span className="snippet-progress"
-                                    style={{ width: `98%`, background: "#d9534f" }}>
+                                    style={{ width: `100%`, background: "#d9534f" }}>
                                 </span>
                             }
+
                             <label htmlFor="title" className="form-label label-title">
                                 Title
                             </label>
+                            <div style={{ width: 'auto', fontSize: '20px' }} id="titleWidth">{title}</div>
                             <textarea
                                 onChange={handleChange}
                                 name="title"
@@ -66,28 +77,34 @@ const Leftside = ({
                                 id="title"
                                 rows="4"
                             ></textarea>
+                            {titleWidth > 600 ?
+                                <span className="title-alert">The title is wider than 600px and it may not be displayed in full length.</span> : ''
+                            }
+
                             <div className="d-flex justify-content-between align-items-center  mt-4">
                                 <button className="btn btn-sm capitalize-btn"
                                     onClick={handleCapitalize}
                                 >
-                                    capitalizae text
+                                    capitalize text
                                 </button>
-                                <span className="chars-info">{`${title.length}`}/120 chars</span>
+                                <span className="chars-info">{`${title.length} chars`} ({titleWidth}/600px)</span>
                             </div>
+
                         </div>
 
                         <div className="mb-3 form-wrapper position-relative mt-5">
-                            {des.length < 250 ?
+                            {desWidth < 960 ?
                                 <span className="snippet-progress"
-                                    style={{ width: `${250 / 100 * des.length / 7}%`, background: "#00a9ff" }}>
+                                    style={{ width: `${100 / 960 * desWidth}%`, background: "#00a9ff" }}>
                                 </span> :
                                 <span className="snippet-progress"
-                                    style={{ width: `98%`, background: "#d9534f" }}>
+                                    style={{ width: `100%`, background: "#d9534f" }}>
                                 </span>
                             }
                             <label htmlFor="Description" className="form-label label-title">
                                 Description
                             </label>
+                            <div style={{ width: 'auto', fontSize: '20px' }} id="desWidth">{des}</div>
                             <textarea
                                 onChange={handleChange}
                                 name="des"
@@ -97,8 +114,11 @@ const Leftside = ({
                                 rows="5"
                             ></textarea>
                             <div className="d-flex justify-content-end align-items-center  mt-4">
-                                <span className="chars-info">{`${des.length}`}/250 chars</span>
+                                <span className="chars-info">{`${des.length} chars`}({desWidth}/960px)</span>
                             </div>
+                            {desWidth > 960 ?
+                                <span className="title-alert">The meta description may get trimmed at ~960 pixels on desktop and at ~680px on mobile. Keep it below ~158 characters.</span> : ''
+                            }
                         </div>
 
                         <div className="mb-3 form-wrapper position-relative mt-5">
@@ -106,12 +126,15 @@ const Leftside = ({
                                 Bold keywords
                             </label>
                             <input
+                                id='boldvalue'
                                 type="text"
                                 className="form-control"
-                                onChange={makeBold}
+                                onKeyUp={makeBold}
+                                // onKeyPress={removeBold}
                                 id="bold-key"
                                 placeholder="sepearte with a space"
                             />
+
                         </div>
 
                         {/* checkbox */}

@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import Highlighter from "react-highlight-words";
 import Parser from 'html-react-parser';
 import mapImg from "../../src/image/map.png";
 import google from "../../src/image/google.png";
@@ -14,7 +17,13 @@ const Rightside = ({
   handledesktop,
   handlemobile,
   responsive,
+  showBold,
+  titleWidth,
+  desWidth,
+  boldtext
 }) => {
+
+  // const boldtext = ["and"];
   return (
     <>
       <div className="col-lg-8 mt-4">
@@ -107,11 +116,34 @@ const Rightside = ({
               <a href="#" className="link">
                 {url}
               </a>
+              {/* {titleWidth > 700 ?
+                <h4>....</h4> :
+                <h4 className="title mt-2" id="scrp_title">{title}</h4>} */}
+
+
+
+
+
+
               <h4 className="title mt-2" id="scrp_title">{title}</h4>
               <p id='metaContent' >
                 {showdata ? <span className="date">Aug 20 2021-</span> : ""}
-                {Parser(des)}
-                {/* {des} */}
+                {/* {desWidth < 1000 ? (Parser(des)) : (
+                  <h4>.......</h4> */}
+                {/* )} */}
+
+
+
+
+                <Highlighter
+                  highlightClassName="YourHighlightClass"
+                  searchWords={boldtext}
+                  autoEscape={true}
+                  textToHighlight={des}
+                />
+                {/* {Parser(des)} */}
+
+
               </p>
               {showRatings ? (
                 <div className="ratings-wrapper d-flex">

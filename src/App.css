@@ -190,15 +190,17 @@ input.goolge-search.mobile {
   padding: 20px;
   border-radius: 10px;
 }
+
+
 .snippet-progress {
   -webkit-transition: all 0.05s ease-out;
   -o-transition: all 0.05s ease-out;
   transition: all 0.05s ease-out;
-  height: 3px;
+  height: 5px;
   display: inline-block;
   position: absolute;
-  border-radius: 10px;
-  left: 6px;
+  border-radius: 15px;
+  left: 0;
 }
 /* right content */
 .right-content {
@@ -250,6 +252,7 @@ input.goolge-search.mobile {
   visibility: hidden;
   transition: 0.3s;
 }
+
 .google-menu li.active::after {
   opacity: 1;
   visibility: visible;
@@ -365,6 +368,37 @@ input.goolge-search.mobile {
   color: #4d5156;
   font-size: 14px;
   line-height: 1.58;
+}
+
+#titleWidth {
+  opacity: 0;
+  visibility: hidden;
+display: inline-block;
+position: absolute;
+top: 0;
+}
+#desWidth {
+  opacity: 0;
+  visibility: hidden;
+display: inline-block;
+position: absolute;
+top: 0;
+}
+.title-alert {
+  background-color: var(--yellow);
+  color: var(--heading-color);
+  padding: 5px;
+  font-size: 12px;
+  width: 100%;
+  display: block;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: .3s;
+}
+.YourHighlightClass  {
+  background: transparent!important;
+  font-weight: 700;
 }
 
 @media (max-width: 1200px) {
